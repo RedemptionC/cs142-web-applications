@@ -1,0 +1,57 @@
+.firstBox {
+  background-color: #dfe1e7;
+  border: solid 1px black;
+  margin: auto;
+}
+p {
+  color: black;
+  /* text-align: center; */
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 40px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.secondBox {
+  background-color: #eeeff2;
+  border: solid 1px black;
+  margin: auto;
+}
+.lastBox {
+  background-color: #eeeff2;
+  margin: auto;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}
+
+.firstBox,
+.secondBox,
+.lastBox {
+  width: 100px;
+  height: 150px;
+  border-left: dotted 10px #d0d0ff;
+}
+
+div {
+  display: inline-block;
+}
+.box:hover {
+  cursor: pointer;
+  background-color: yellow;
+}
+
+.box:hover > p {
+  color: goldenrod;
+}
+
+.container div {
+  margin: 10px;
+}
+
+.container {
+  display: flex;
+}
+
+* {
+  transition-duration: 0.5s;
+}
