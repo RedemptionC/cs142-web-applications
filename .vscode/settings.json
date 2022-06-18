@@ -1,4 +1,5 @@
 {
-    "editor.formatOnSave": true,
-    "files.autoSave": "onFocusChange"
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange",
+  "editor.fontFamily": "Inconsolata, 'Courier New', monospace"
 }
