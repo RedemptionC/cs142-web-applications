@@ -1,3 +1,5 @@
+"use strict";
+
 window.Cs142TemplateProcessor = class Cs142TemplateProcessor {
   constructor(template) {
     this.template = template;
