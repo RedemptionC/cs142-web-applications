@@ -32,9 +32,6 @@ p {
   border-left: dotted 10px #d0d0ff;
 }
 
-div {
-  display: inline-block;
-}
 .box:hover {
   cursor: pointer;
   background-color: yellow;

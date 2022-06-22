@@ -41,6 +41,11 @@ p {
   gap: 10px;
 }
 
+/* 以下可以实现和 `gap: 10px`类似的效果 */
+/* .container div {
+  margin-top: 10px;
+} */
+
 * {
   transition-duration: 0.5s;
 }
