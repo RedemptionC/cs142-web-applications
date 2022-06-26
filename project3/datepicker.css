@@ -1,0 +1,54 @@
+* {
+  font-family: Inconsolata;
+  background-color: antiquewhite;
+}
+
+.date-picker {
+  max-width: 320px;
+  text-align: center;
+  margin: 60px auto;
+  user-select: none;
+}
+
+.selected-date {
+  display: inline;
+}
+
+.selected-date:hover {
+  background-color: bisque;
+}
+
+.date-picker .month {
+  display: flex;
+  justify-content: space-between;
+}
+
+.arrow:hover {
+  background-color: #f3f3f3;
+}
+
+.arrow:active {
+  background-color: yellowgreen;
+}
+
+.week-abbrevs {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.date-picker .days-in-cur-month {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.date-picker .days-in-cur-month .selected {
+  background-color: cadetblue;
+}
+
+.not-this-month {
+  background-color: rgb(240, 236, 236);
+}
+
+.hide {
+  display: none;
+}
