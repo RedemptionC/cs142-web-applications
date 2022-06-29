@@ -26,9 +26,10 @@ class Example extends React.Component {
       counter: 0,
       inputValue: '',
       buttonWasClicked: '',
+      motto:'Hope is the best thing',
     };
 
-    // React events are called directly from DOM event handlers
+    // React events are called directly from DOM event handlers ??? TODO: what does this mean
     // so we cannot directly call the methods of this class. We
     // generate new functions that handle the event by just calling
     // the method that handles the event.
@@ -36,6 +37,8 @@ class Example extends React.Component {
     // Note: A commmon idiom in React code is to use JavaScript bind() to
     // smash the method to accomplish this passthrough to the method:
     //      this.handleChange = this.handleChange.bind(this);
+
+    this.handleChangeMotto = e => this.handleChangeMottoPrivate(e);
   }
 
   // React components have several "lifecycle functions"
@@ -44,7 +47,7 @@ class Example extends React.Component {
 
   // componentDidMount - Called when Component is activiated
   componentDidMount() {
-    // To demonstate state updating we define a function
+    // To demonstrate state updating we define a function
     // that increments the counter state and instruct the
     // DOM to call it every 2 seconds.
     /* eslint-disable react/no-access-state-in-setstate */
@@ -67,6 +70,12 @@ class Example extends React.Component {
   // Method called when the input box is typed into.
   handleChange(event) {
     this.setState({ inputValue: event.target.value });
+  }
+
+  handleChangeMottoPrivate(e){
+    this.setState({
+      motto: e.target.value
+    });
   }
 
   // Method called when the button is pushed
@@ -103,7 +112,9 @@ class Example extends React.Component {
         <h1>CS142 Project#4 React.js Example</h1>
 
         <div className="motto-update">
-          {/* Your problem #1 motto displaying and updating widget goes here */}
+          <p className='stu-name'>{this.state.name}</p>
+          <p id='motto'>{this.state.motto}</p>
+          <input type="text" className='motto' value={this.state.motto} onChange={this.handleChangeMotto}></input>
         </div>
 
         <p>
