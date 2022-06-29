@@ -9,13 +9,36 @@ import './States.css';
 class States extends React.Component {
   constructor(props) {
     super(props);
-    console.log('window.cs142models.statesModel()', window.cs142models.statesModel());
+    this.state = {
+      dataSource : window.cs142models.statesModel().slice(),
+      keyword:'',
+    }
+    // console.log('window.cs142models.statesModel()', window.cs142models.statesModel());
+    this.handleSearchChange = e => this.handleChange(e);
   }
-
+  handleChange(e){
+    this.setState({
+      dataSource:window.cs142models.statesModel().filter(state=>state.toLowerCase().includes(e.target.value)).sort(),
+      keyword:e.target.value,
+    })
+  }
   render() {
+    let descJsx;
+    if(this.state.dataSource.length == 0 ){
+      descJsx = <p>No matching results.</p>
+    }else{
+      descJsx = <p>Searching : {this.state.keyword}</p>
+    }
+    if(this.state.keyword ===''){
+      descJsx = <p>Please type to search.</p>
+    }
     return (
       <div>
-        Replace this with the code for CS142 Project #4, Problem #2
+        <input type="text" onChange={this.handleSearchChange}></input>
+        {descJsx}
+        <ol>
+          {this.state.dataSource.map(state => <li key={state}>{state}</li>)}
+        </ol>    
       </div>
     );
   }
