@@ -37,8 +37,6 @@ class Example extends React.Component {
     // Note: A commmon idiom in React code is to use JavaScript bind() to
     // smash the method to accomplish this passthrough to the method:
     //      this.handleChange = this.handleChange.bind(this);
-
-    this.handleChangeMotto = e => this.handleChangeMottoPrivate(e);
   }
 
   // React components have several "lifecycle functions"
@@ -72,7 +70,7 @@ class Example extends React.Component {
     this.setState({ inputValue: event.target.value });
   }
 
-  handleChangeMottoPrivate(e){
+  handleChangeMotto(e){
     this.setState({
       motto: e.target.value
     });
@@ -114,7 +112,7 @@ class Example extends React.Component {
         <div className="motto-update">
           <p className='stu-name'>{this.state.name}</p>
           <p id='motto'>{this.state.motto}</p>
-          <input type="text" className='motto' value={this.state.motto} onChange={this.handleChangeMotto}></input>
+          <input type="text" className='motto' value={this.state.motto} onChange={this.handleChangeMotto.bind(this)}></input>
         </div>
 
         <p>

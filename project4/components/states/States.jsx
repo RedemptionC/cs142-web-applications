@@ -14,7 +14,6 @@ class States extends React.Component {
       keyword:'',
     }
     // console.log('window.cs142models.statesModel()', window.cs142models.statesModel());
-    this.handleSearchChange = e => this.handleChange(e);
   }
   handleChange(e){
     this.setState({
@@ -34,7 +33,7 @@ class States extends React.Component {
     }
     return (
       <div>
-        <input type="text" onChange={this.handleSearchChange}></input>
+        <input type="text" onChange={this.handleChange.bind(this)}></input>
         {descJsx}
         <ol>
           {this.state.dataSource.map(state => <li key={state}>{state}</li>)}
