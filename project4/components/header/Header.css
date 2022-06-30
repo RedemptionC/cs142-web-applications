@@ -1,0 +1,10 @@
+#header {
+    font-family: 'Inconsolata';
+    display: flex;
+    align-items: center;
+}
+
+#header img{
+    width: 60px;
+    height: 40px;
+}

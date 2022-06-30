@@ -1,5 +1,6 @@
 import React from 'react';
 import './States.css';
+import Header from '../header/Header'
 
 /**
  * Define States, a React componment of CS142 project #4 problem #2.  The model
@@ -33,11 +34,14 @@ class States extends React.Component {
     }
     return (
       <div>
-        <input type="text" onChange={this.handleChange.bind(this)}></input>
-        {descJsx}
-        <ol>
-          {this.state.dataSource.map(state => <li key={state}>{state}</li>)}
-        </ol>    
+        <Header />
+        <div>
+          <input type="text" onChange={this.handleChange.bind(this)}></input>
+          {descJsx}
+          <ol>
+            {this.state.dataSource.map(state => <li key={state}>{state}</li>)}
+          </ol>    
+        </div>
       </div>
     );
   }
