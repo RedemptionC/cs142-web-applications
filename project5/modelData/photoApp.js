@@ -187,6 +187,7 @@
    comment8, comment9, comment10, comment11, comment12, comment13];
 
    comments.forEach(function (comment) {
+      // 首先找出当前comment对应的photo，然后将当前comment与该photo联系起来（push进去）
       var photo = photos.filter(function (photo) {
          return (photo._id === comment.photo_id);
       })[0]; //only one match. return the content of the match inside the array

@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  AppBar, Toolbar, Typography
+  AppBar, Toolbar, Button
 } from '@material-ui/core';
 import './TopBar.css';
+import { useLocation } from 'react-router-dom';
 
 /**
  * Define TopBar, a React componment of CS142 project #5
@@ -13,12 +14,19 @@ class TopBar extends React.Component {
   }
 
   render() {
+    console.log(this.props.appContext);
     return (
       <AppBar className="cs142-topbar-appBar" position="absolute">
         <Toolbar>
-          <Typography variant="h5" color="inherit">
-              This is the TopBar component
-          </Typography>
+          <Button  color="secondary" href="/" disabled>
+              Cheng Geng
+          </Button>
+          <Button  color="inherit" href="/photo-share.html">
+              Home
+          </Button>
+          <Button  color="inherit">
+              {this.props.appContext}
+          </Button>
         </Toolbar>
       </AppBar>
     );
