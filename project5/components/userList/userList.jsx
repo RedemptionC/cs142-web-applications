@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 import "./userList.css";
+import fetchModel from "../../lib/fetchModelData";
 
 /**
  * Define UserList, a React componment of CS142 project #5
@@ -15,11 +16,21 @@ import "./userList.css";
 class UserList extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      users:[],
+    }
+  }
+
+  componentDidMount(){
+    fetchModel('http://localhost:3000/user/list').then(
+      result => this.setState({
+        users:JSON.parse(result)
+      })
+    )
   }
 
   render() {
-    let users = window.cs142models.userListModel();
-    let UserItems = users.map((user) => {
+    let UserItems = this.state.users.map((user) => {
       let name =`${user.first_name} ${user.last_name}`;
       return (
         <div key={name}>
@@ -33,7 +44,7 @@ class UserList extends React.Component {
     return (
       <div>
         <Typography variant="body1">
-          This is the user list, which takes up 3/12 of the window. 
+          User list.
         </Typography>
         <List component="nav">
           {UserItems}

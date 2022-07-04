@@ -2,6 +2,7 @@ import React from "react";
 import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "./userPhotos.css";
+import fetchModel from "../../lib/fetchModelData";
 
 /**
  * Define UserPhotos, a React componment of CS142 project #5
@@ -9,6 +10,10 @@ import "./userPhotos.css";
 class UserPhotos extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      user:{},
+      photosOfThisUser:[],
+    }
   }
 
   // TODO: since we can't re-render this component with different props 
@@ -17,20 +22,36 @@ class UserPhotos extends React.Component {
   // update:here we should just use componentDidMount, because componentDidUpdate
   // won't be called for the first render!!!!
   componentDidMount(){
-    console.log("componentDidUpdate in userPhotos is called");
-    let user = window.cs142models.userModel(this.props.match.params.userId);
-    let appContext = `Photos of ${user.first_name} ${user.last_name}`;
+    fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`).then(
+      result => this.setState({
+        user:JSON.parse(result)
+      })
+    );
+    let appContext = `Photos of ${this.state.user.first_name} ${this.state.user.last_name}`;
     this.props.setAppContext(appContext);
+    fetchModel(`http://localhost:3000/photosOfUser/${this.props.match.params.userId}`).then(
+      result => this.setState({
+        photosOfThisUser:JSON.parse(result)
+      })
+    )
+  }
+
+  componentDidUpdate(prevProps) {
+    // fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`).then(
+    //   result => this.setState({
+    //     user:JSON.parse(result)
+    //   })
+    // )
+    let appContext = `Photos of ${this.state.user.first_name} ${this.state.user.last_name}`;
+    if (prevProps.appContext !== appContext) {
+      this.props.setAppContext(appContext);
+    }
   }
 
   render() {
-    console.log("render in userPhotos is called");
-    console.log(this.props.location.pathname);
-    let user = window.cs142models.userModel(this.props.match.params.userId);
-    let photosOfThisUser = window.cs142models.photoOfUserModel(user._id);
     let photos =
-      photosOfThisUser &&
-      photosOfThisUser.map((photo) => {
+      this.state.photosOfThisUser &&
+      this.state.photosOfThisUser.map((photo) => {
         let comments =
           photo["comments"] &&
           photo["comments"].map((comment) => {

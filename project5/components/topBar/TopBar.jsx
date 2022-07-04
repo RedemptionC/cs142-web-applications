@@ -14,7 +14,6 @@ class TopBar extends React.Component {
   }
 
   render() {
-    console.log(this.props.appContext);
     return (
       <AppBar className="cs142-topbar-appBar" position="absolute">
         <Toolbar>

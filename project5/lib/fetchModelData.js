@@ -17,10 +17,18 @@ var Promise = require("Promise");
 
 function fetchModel(url) {
   return new Promise(function(resolve, reject) {
-      console.log(url);
-      setTimeout(() => reject({status: 501, statusText: "Not Implemented"}),0);
-      // On Success return:
-      // resolve({data: getResponseObject});
+      let xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function(e){
+        if(this.readyState===4){
+          if(this.status===200){
+            resolve(this.responseText);
+          }else{
+            reject(new Error("fail to get"))
+          }
+        }
+      }
+      xhr.open('GET',url);
+      xhr.send();
   });
 }
 

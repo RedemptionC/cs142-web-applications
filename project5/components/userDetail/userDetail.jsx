@@ -2,6 +2,7 @@ import React from "react";
 import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import "./userDetail.css";
+import fetchModel from "../../lib/fetchModelData";
 
 /**
  * Define UserDetail, a React componment of CS142 project #5
@@ -9,15 +10,28 @@ import "./userDetail.css";
 class UserDetail extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      user:{},
+    }
   }
 
   componentDidMount() {
-    let user = window.cs142models.userModel(this.props.match.params.userId);
+    fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`).then(
+      result => this.setState({
+        user:JSON.parse(result)
+      })
+    )
+    let user = this.state.user;
     let name = `${user.first_name} ${user.last_name}`;
     this.props.setAppContext(name);
   }
   componentDidUpdate(prevProps) {
-    let user = window.cs142models.userModel(this.props.match.params.userId);
+    fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`).then(
+      result => this.setState({
+        user:JSON.parse(result)
+      })
+    )
+    let user = this.state.user;
     let name = `${user.first_name} ${user.last_name}`;
     if (prevProps.appContext !== name) {
       this.props.setAppContext(name);
@@ -25,9 +39,7 @@ class UserDetail extends React.Component {
   }
 
   render() {
-    let user = window.cs142models.userModel(this.props.match.params.userId);
-    let photosOfThisUser = window.cs142models.photoOfUserModel(user._id);
-    console.log(this.props.location.pathname);
+    let user = this.state.user;
     return (
       <div>
         <Typography variant="body1">
