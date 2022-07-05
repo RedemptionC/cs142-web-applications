@@ -22,13 +22,12 @@ class UserPhotos extends React.Component {
   // update:here we should just use componentDidMount, because componentDidUpdate
   // won't be called for the first render!!!!
   componentDidMount(){
+    console.log('componentDidMount in UserPhotos is called');
     fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`).then(
       result => this.setState({
         user:JSON.parse(result)
       })
     );
-    let appContext = `Photos of ${this.state.user.first_name} ${this.state.user.last_name}`;
-    this.props.setAppContext(appContext);
     fetchModel(`http://localhost:3000/photosOfUser/${this.props.match.params.userId}`).then(
       result => this.setState({
         photosOfThisUser:JSON.parse(result)
@@ -37,11 +36,7 @@ class UserPhotos extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`).then(
-    //   result => this.setState({
-    //     user:JSON.parse(result)
-    //   })
-    // )
+    console.log('componentDidUpdate in UserPhotos is called');
     let appContext = `Photos of ${this.state.user.first_name} ${this.state.user.last_name}`;
     if (prevProps.appContext !== appContext) {
       this.props.setAppContext(appContext);

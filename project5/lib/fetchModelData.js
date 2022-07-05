@@ -17,6 +17,7 @@ var Promise = require("Promise");
 
 function fetchModel(url) {
   return new Promise(function(resolve, reject) {
+      console.log(`fetchModel called with ${url}`);
       let xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function(e){
         if(this.readyState===4){
