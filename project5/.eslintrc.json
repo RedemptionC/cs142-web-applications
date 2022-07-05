@@ -75,6 +75,7 @@
     "no-var": 0,
     "quotes": 0,
     "vars-on-top": 0,
+    "no-path-concat": 0,
 
     // Spacing rules
     "block-spacing": 0,
