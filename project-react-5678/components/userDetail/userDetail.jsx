@@ -11,39 +11,41 @@ class UserDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user:{},
-    }
+      user: {},
+    };
   }
 
   componentDidMount() {
-    console.log('componentDidMount in UserDetail is called');
-    fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`).then(
-      result => {
+    console.log("componentDidMount in UserDetail is called");
+    fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`)
+      .then((result) => {
         this.setState({
-          user:JSON.parse(result)
-        })
+          user: JSON.parse(result),
+        });
+      })
+      .then(() => {
         let user = this.state.user;
         let name = `${user.first_name} ${user.last_name}`;
         this.props.setAppContext(name);
-      }
-    )
+      });
   }
-  
+
   componentDidUpdate(prevProps) {
-    if(this.props.match.params.userId!==prevProps.match.params.userId){
-      console.log('componentDidUpdate in UserDetail is called');
-      fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`).then(
-        result => {
+    if (this.props.match.params.userId !== prevProps.match.params.userId) {
+      console.log("componentDidUpdate in UserDetail is called");
+      fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`)
+        .then((result) => {
           this.setState({
-            user:JSON.parse(result)
-          })
+            user: JSON.parse(result),
+          });
+        })
+        .then(() => {
           let user = this.state.user;
           let name = `${user.first_name} ${user.last_name}`;
           if (prevProps.appContext !== name) {
             this.props.setAppContext(name);
           }
-        }
-      )
+        });
     }
   }
 
