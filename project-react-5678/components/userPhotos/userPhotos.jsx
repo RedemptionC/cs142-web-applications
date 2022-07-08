@@ -11,36 +11,46 @@ class UserPhotos extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user:{},
-      photosOfThisUser:[],
-    }
+      user: {},
+      photosOfThisUser: [],
+    };
   }
 
-  // TODO: since we can't re-render this component with different props 
+  // TODO: since we can't re-render this component with different props
   // (while in userDetail, we can do that by clicking different user in the userList)
   // we just use componentDidMount instead of componentDidUpdate here.
   // update:here we should just use componentDidMount, because componentDidUpdate
   // won't be called for the first render!!!!
-  componentDidMount(){
-    console.log('componentDidMount in UserPhotos is called');
-    fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`).then(
-      result => this.setState({
-        user:JSON.parse(result)
+  componentDidMount() {
+    console.log("componentDidMount in UserPhotos is called");
+    fetchModel(
+      `http://localhost:3000/user/${this.props.match.params.userId}`
+    ).then((result) =>
+      this.setState(
+        {
+          user: JSON.parse(result),
+        },
+        () => {
+          let appContext = `Photos of ${this.state.user.first_name} ${this.state.user.last_name}`;
+          this.props.setAppContext(appContext);
+        }
+      )
+    );
+    fetchModel(
+      `http://localhost:3000/photosOfUser/${this.props.match.params.userId}`
+    ).then((result) =>
+      this.setState({
+        photosOfThisUser: JSON.parse(result),
       })
     );
-    fetchModel(`http://localhost:3000/photosOfUser/${this.props.match.params.userId}`).then(
-      result => this.setState({
-        photosOfThisUser:JSON.parse(result)
-      })
-    )
   }
 
   componentDidUpdate(prevProps) {
-    console.log('componentDidUpdate in UserPhotos is called');
-    let appContext = `Photos of ${this.state.user.first_name} ${this.state.user.last_name}`;
-    if (prevProps.appContext !== appContext) {
-      this.props.setAppContext(appContext);
-    }
+    // console.log('componentDidUpdate in UserPhotos is called');
+    // let appContext = `Photos of ${this.state.user.first_name} ${this.state.user.last_name}`;
+    // if (prevProps.appContext !== appContext) {
+    //   this.props.setAppContext(appContext);
+    // }
   }
 
   render() {
@@ -69,11 +79,9 @@ class UserPhotos extends React.Component {
               Created at {photo["date_time"]}
             </Typography>
             <img src={`/images/${photo["file_name"]}`}></img>
-            {
-              photo["comments"] !== undefined && photo["comments"].length > 0 ? (
-                <Typography variant="body1">comments:</Typography>
-              ) : undefined
-            }
+            {photo["comments"] !== undefined && photo["comments"].length > 0 ? (
+              <Typography variant="body1">comments:</Typography>
+            ) : undefined}
             {comments}
           </div>
         );

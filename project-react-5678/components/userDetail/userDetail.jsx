@@ -19,12 +19,13 @@ class UserDetail extends React.Component {
     console.log("componentDidMount in UserDetail is called");
     fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`)
       .then((result) => {
+        let resultObj = JSON.parse(result);
         this.setState({
-          user: JSON.parse(result),
+          user: resultObj,
         });
+        return resultObj;
       })
-      .then(() => {
-        let user = this.state.user;
+      .then((user) => {
         let name = `${user.first_name} ${user.last_name}`;
         this.props.setAppContext(name);
       });
@@ -35,12 +36,13 @@ class UserDetail extends React.Component {
       console.log("componentDidUpdate in UserDetail is called");
       fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`)
         .then((result) => {
+          let resultObj = JSON.parse(result);
           this.setState({
-            user: JSON.parse(result),
+            user: resultObj,
           });
+          return resultObj;
         })
-        .then(() => {
-          let user = this.state.user;
+        .then((user) => {
           let name = `${user.first_name} ${user.last_name}`;
           if (prevProps.appContext !== name) {
             this.props.setAppContext(name);
