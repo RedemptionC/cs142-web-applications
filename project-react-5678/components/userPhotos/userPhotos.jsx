@@ -25,17 +25,14 @@ class UserPhotos extends React.Component {
     console.log("componentDidMount in UserPhotos is called");
     fetchModel(
       `http://localhost:3000/user/${this.props.match.params.userId}`
-    ).then((result) =>
-      this.setState(
-        {
-          user: JSON.parse(result),
-        },
-        () => {
-          let appContext = `Photos of ${this.state.user.first_name} ${this.state.user.last_name}`;
-          this.props.setAppContext(appContext);
-        }
-      )
-    );
+    ).then((result) => {
+      let user = JSON.parse(result);
+      this.setState({
+        user: user,
+      });
+      let appContext = `Photos of ${user.first_name} ${user.last_name}`;
+      this.props.setAppContext(appContext);
+    });
     fetchModel(
       `http://localhost:3000/photosOfUser/${this.props.match.params.userId}`
     ).then((result) =>
@@ -43,14 +40,6 @@ class UserPhotos extends React.Component {
         photosOfThisUser: JSON.parse(result),
       })
     );
-  }
-
-  componentDidUpdate(prevProps) {
-    // console.log('componentDidUpdate in UserPhotos is called');
-    // let appContext = `Photos of ${this.state.user.first_name} ${this.state.user.last_name}`;
-    // if (prevProps.appContext !== appContext) {
-    //   this.props.setAppContext(appContext);
-    // }
   }
 
   render() {
