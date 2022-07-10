@@ -52,7 +52,7 @@ class UserDetail extends React.Component {
     return (
       <div>
         <Typography variant="body1">
-          {`[${user.occupation}] ${user.first_name} ${user.last_name} (id:${user._id})`}
+          {`[${user.occupation}] ${user.first_name} ${user.last_name}`}
           🌞
         </Typography>
 
