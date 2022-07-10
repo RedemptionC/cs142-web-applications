@@ -37,8 +37,9 @@ class UserList extends React.Component {
       let name = `${user.first_name} ${user.last_name}`;
       return (
         <div key={name}>
-          <ListItem>
-            <NavLink to={`/users/${user._id}`}>{name}</NavLink>
+          <ListItem component={NavLink} to={`/users/${user._id}`}>
+            <ListItemText primary={name}></ListItemText>
+            {/* <NavLink to={`/users/${user._id}`}>{name}</NavLink> */}
           </ListItem>
           <Divider />
         </div>
