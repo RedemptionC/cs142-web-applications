@@ -1,8 +1,9 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Typography, Link } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
 import "./userPhotos.css";
 import fetchModel from "../../lib/fetchModelData";
+import formatTime from "../../lib/formatTime";
 
 /**
  * Define UserPhotos, a React componment of CS142 project #5
@@ -55,10 +56,13 @@ class UserPhotos extends React.Component {
             return (
               <div key={comment["_id"]}>
                 <Typography variant="body1">
-                  <Link to={`/users/${commentUser["_id"]}`}>
+                  <Link
+                    to={`/users/${commentUser["_id"]}`}
+                    component={RouterLink}
+                  >
                     {`${commentUser["first_name"]} ${commentUser["last_name"]} `}
                   </Link>
-                  {comment["date_time"]}
+                  {formatTime(comment["date_time"])}
                 </Typography>
                 <Typography variant="body1">{comment["comment"]}</Typography>
               </div>
@@ -66,12 +70,12 @@ class UserPhotos extends React.Component {
           });
         return (
           <div key={photo["_id"]}>
-            <Typography variant="body1">
-              Created at {photo["date_time"]}
+            <Typography variant="h6">
+              Posted at {formatTime(photo["date_time"])}
             </Typography>
             <img src={`/images/${photo["file_name"]}`}></img>
             {photo["comments"] !== undefined && photo["comments"].length > 0 ? (
-              <Typography variant="body1">comments:</Typography>
+              <Typography variant="h6">comments:</Typography>
             ) : undefined}
             {comments}
           </div>

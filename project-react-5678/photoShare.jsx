@@ -45,7 +45,7 @@ class PhotoShare extends React.Component {
                     exact
                     path="/"
                     render={() => (
-                      <Typography variant="body1">
+                      <Typography variant="h2">
                         Welcome to your photosharing app!
                       </Typography>
                     )}

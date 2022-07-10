@@ -1,6 +1,6 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Typography, Link as LinkUI } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
 import "./userDetail.css";
 import fetchModel from "../../lib/fetchModelData";
 
@@ -51,15 +51,24 @@ class UserDetail extends React.Component {
     let user = this.state.user;
     return (
       <div>
-        <Typography variant="body1">
-          {`[${user.occupation}] ${user.first_name} ${user.last_name}`}
-          🌞
+        <Typography variant="h1">
+          {`${user.first_name} ${user.last_name}`}
         </Typography>
 
-        <Typography variant="body1">Located in {user.location} 🚗</Typography>
+        <Typography variant="h4">
+          {`${user.occupation}`} , Located in {user.location}
+        </Typography>
 
-        <Typography variant="body1">Description: {user.description}</Typography>
-        <Link to={`/photos/${user._id}`}>Photos</Link>
+        <Typography variant="h6">Description:</Typography>
+        <Typography variant="body1">{user.description}</Typography>
+        <LinkUI
+          component={RouterLink}
+          to={`/photos/${user._id}`}
+          color="primary"
+          variant="h6"
+        >
+          Photos
+        </LinkUI>
       </div>
     );
   }
