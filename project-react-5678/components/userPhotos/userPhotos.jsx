@@ -23,23 +23,25 @@ class UserPhotos extends React.Component {
   // won't be called for the first render!!!!
   componentDidMount() {
     console.log("componentDidMount in UserPhotos is called");
-    fetchModel(
-      `http://localhost:3000/user/${this.props.match.params.userId}`
-    ).then((result) => {
-      let user = JSON.parse(result);
-      this.setState({
-        user: user,
-      });
-      let appContext = `Photos of ${user.first_name} ${user.last_name}`;
-      this.props.setAppContext(appContext);
-    });
+    fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`)
+      .then((result) => {
+        let user = result["data"];
+        this.setState({
+          user: user,
+        });
+        let appContext = `Photos of ${user.first_name} ${user.last_name}`;
+        this.props.setAppContext(appContext);
+      })
+      .catch(alert);
     fetchModel(
       `http://localhost:3000/photosOfUser/${this.props.match.params.userId}`
-    ).then((result) =>
-      this.setState({
-        photosOfThisUser: JSON.parse(result),
-      })
-    );
+    )
+      .then((result) =>
+        this.setState({
+          photosOfThisUser: result["data"],
+        })
+      )
+      .catch(alert);
   }
 
   render() {

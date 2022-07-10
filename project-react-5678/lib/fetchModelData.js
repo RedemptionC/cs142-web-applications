@@ -1,5 +1,5 @@
 var Promise = require("Promise");
-
+import axios from "axios";
 /**
  * FetchModel - Fetch a model from the web server.
  *     url - string - The URL to issue the GET request.
@@ -15,21 +15,22 @@ var Promise = require("Promise");
  */
 
 function fetchModel(url) {
-  return new Promise(function (resolve, reject) {
-    console.log(`fetchModel called with ${url}`);
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function (e) {
-      if (this.readyState === 4) {
-        if (this.status === 200) {
-          resolve(this.responseText);
-        } else {
-          reject(new Error(`fail to get ${url}`));
-        }
-      }
-    };
-    xhr.open("GET", url);
-    xhr.send();
-  });
+  return axios.get(url);
+  // return new Promise(function (resolve, reject) {
+  //   console.log(`fetchModel called with ${url}`);
+  //   let xhr = new XMLHttpRequest();
+  //   xhr.onreadystatechange = function (e) {
+  //     if (this.readyState === 4) {
+  //       if (this.status === 200) {
+  //         resolve(this.responseText);
+  //       } else {
+  //         reject(new Error(`fail to get ${url}`));
+  //       }
+  //     }
+  //   };
+  //   xhr.open("GET", url);
+  //   xhr.send();
+  // });
 }
 
 export default fetchModel;

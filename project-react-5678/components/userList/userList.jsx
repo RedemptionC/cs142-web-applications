@@ -6,7 +6,7 @@ import {
   ListItemText,
   Typography,
 } from "@material-ui/core";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./userList.css";
 import fetchModel from "../../lib/fetchModelData";
 
@@ -17,39 +17,37 @@ class UserList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users:[],
-    }
+      users: [],
+    };
   }
 
-  componentDidMount(){
-    console.log('componentDidMount in userList is called');
-    fetchModel('http://localhost:3000/user/list').then(
-      result => this.setState({
-        users:JSON.parse(result)
+  componentDidMount() {
+    console.log("componentDidMount in userList is called");
+    fetchModel("http://localhost:3000/user/list")
+      .then((result) => {
+        this.setState({
+          users: result["data"],
+        });
       })
-    )
+      .catch(alert);
   }
 
   render() {
     let UserItems = this.state.users.map((user) => {
-      let name =`${user.first_name} ${user.last_name}`;
+      let name = `${user.first_name} ${user.last_name}`;
       return (
         <div key={name}>
           <ListItem>
-            <NavLink to= {`/users/${user._id}`} >{name}</NavLink>
+            <NavLink to={`/users/${user._id}`}>{name}</NavLink>
           </ListItem>
           <Divider />
-         </div>
+        </div>
       );
     });
     return (
       <div>
-        <Typography variant="body1">
-          User list.
-        </Typography>
-        <List component="nav">
-          {UserItems}
-        </List>
+        <Typography variant="body1">User list.</Typography>
+        <List component="nav">{UserItems}</List>
       </div>
     );
   }

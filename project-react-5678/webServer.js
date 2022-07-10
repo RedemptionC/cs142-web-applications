@@ -154,7 +154,6 @@ app.get("/user/:id", function (request, response) {
       response.status(400).send("Not found");
       return;
     }
-    console.log(user);
     response.status(200).send(user[0]);
   });
 });
