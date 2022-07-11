@@ -16,14 +16,11 @@ class TopBar extends React.Component {
       <AppBar className="cs142-topbar-appBar" position="absolute">
         <Toolbar>
           <Box display="flex" flexGrow={1}>
-            <Button color="secondary" href="/" disabled>
-              Cheng Geng
-            </Button>
             <Button color="inherit" href="/photo-share.html">
               Home
             </Button>
           </Box>
-          <Button color="inherit">{this.props.appContext}</Button>
+          <Button disabled>{this.props.appContext}</Button>
         </Toolbar>
       </AppBar>
     );

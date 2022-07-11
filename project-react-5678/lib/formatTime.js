@@ -1,6 +1,6 @@
 export default function formatTime(ISODate) {
   let date = new Date(ISODate);
-  const weekDays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const months = [
     "January",
     "February",
