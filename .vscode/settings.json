@@ -1,6 +1,6 @@
 {
   "editor.formatOnSave": true,
   "files.autoSave": "onFocusChange",
-  "editor.fontFamily": "'Inconsolata NF', '微软雅黑'",
+  "editor.fontFamily": "'Inconsolata', '微软雅黑'",
   "python.formatting.provider": "yapf"
 }
