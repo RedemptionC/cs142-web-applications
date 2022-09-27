@@ -18,15 +18,15 @@ class DatePicker {
   constructor(datePickerID, callbackFn) {
     this.datePickerID = datePickerID;
     this.callbackFn = callbackFn;
-    // 首先这里应该为date-picker生成一个最基本的框架
-    // 首先是selected-date:显示当前选中的日期
+    // Create datepicker:selectedDate month weeksAbbreviation days
     let datePickerElem = document.getElementById(datePickerID);
     datePickerElem.className = "date-picker";
+    // SelectedDate
     let selectedDateElem = document.createElement("div");
     selectedDateElem.className = "selected-date";
     selectedDateElem.textContent = "2022 / 06 / 25";
     datePickerElem.appendChild(selectedDateElem);
-    // 然后是和月份相关的: < , cur-mth, >
+    // Month: < , cur-mth, >
     let monthElem = document.createElement("div");
     monthElem.className = "month";
     datePickerElem.appendChild(monthElem);
@@ -67,7 +67,7 @@ class DatePicker {
       } ${this.year}`;
       this.populateDays();
     });
-    // 然后是星期相关的：首先是SUN -> SAT的七个缩写
+    // WeeksAbbreviation
     let weekAbbrevsElem = document.createElement("div");
     weekAbbrevsElem.className = "week-abbrevs";
     datePickerElem.appendChild(weekAbbrevsElem);
@@ -78,31 +78,35 @@ class DatePicker {
       weekAbbrevElem.textContent = weekAbbrev;
       weekAbbrevsElem.appendChild(weekAbbrevElem);
     }
-    // 剩下的就是每个月的days. 首先，调用render时，会根据参数对应的月份populateDays。
-    // 然后，每次点击left or right arrow,也会populateDays.
+    // Create container of days
     let daysInCurMthElem = document.createElement("div");
     daysInCurMthElem.className = "days-in-cur-month";
     datePickerElem.appendChild(daysInCurMthElem);
-    // TODO:还可以为selected-date设置一个toggle,用于控制是否显示下面的日历
-    // selectedDateElem.addEventListener("click", (e) => {
-    //   daysInCurMthElem.classList.toggle("hide");
-    // });
-    // ↑ 似乎直接为daysInCurMthElem设置display:none会失效，其实可以把除了selectedDays之外都
-    // 放在一个div里
-    // 不过总体来说，这个也没有要求实现，就不管了
+    // onclick of selected-date: toggle display
+    selectedDateElem.addEventListener("click", () => {
+      if (weekAbbrevsElem.style.display != "none") {
+        weekAbbrevsElem.style.display = "none";
+        daysInCurMthElem.style.display = "none";
+      } else {
+        weekAbbrevsElem.style.display = "grid";
+        daysInCurMthElem.style.display = "grid";
+      }
+    });
   }
 
   render(date) {
     // first we set the selectedDate to date
     document.querySelector(`#${this.datePickerID} .selected-date`).textContent =
       formatDate(date);
-    // TODO: is render() always first called?
-    // is it sensible to use it as init date?
+    // We assume render is always called first
     this.initDate = date;
     this.month = date.getMonth();
     this.year = date.getFullYear();
     this.selectedMonth = this.month;
     this.selectedYear = this.year;
+    document.querySelector(`#${this.datePickerID} .cur-mth`).textContent = `${
+      months[this.month]
+    } ${this.year}`;
     this.populateDays();
   }
 
