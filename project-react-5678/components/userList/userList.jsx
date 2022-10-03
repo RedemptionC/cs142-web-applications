@@ -23,7 +23,7 @@ class UserList extends React.Component {
 
   componentDidMount() {
     console.log("componentDidMount in userList is called");
-    fetchModel("http://localhost:3000/user/list")
+    fetchModel("/user/list")
       .then((result) => {
         this.setState({
           users: result["data"],
