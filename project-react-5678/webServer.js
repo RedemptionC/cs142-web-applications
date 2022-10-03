@@ -33,9 +33,14 @@ var mongoose = require("mongoose");
 mongoose.Promise = require("bluebird");
 
 var async = require("async");
+const session = require("express-session")
+const bodyParser = require("body-parser")
+const multer = require("multer")
 
 var express = require("express");
 var app = express();
+app.use(session({ secret: 'secretKey', resave: false, saveUninitialized: false }));
+app.use(bodyParser.json())
 
 // Load the Mongoose schema for User, Photo, and SchemaInfo
 var User = require("./schema/user.js");
