@@ -1,9 +1,9 @@
+* {
+  margin: 0;
+}
+
 .firstBox {
   background-color: #dfe1e7;
-  border-top: solid 1px black;
-  height: 100px;
-  width: 100px;
-  margin: auto;
 }
 
 p {
@@ -19,16 +19,18 @@ p {
 
 .secondBox {
   background-color: #eeeff2;
+}
+
+.box {
   border-top: solid 1px black;
   height: 100px;
   width: 100px;
-  margin: auto;
+  margin-bottom: 1%;
 }
+
 .lastBox {
   background-color: #eeeff2;
   border: solid 4px black;
-  height: 100px;
-  width: 100px;
   margin: auto;
   display: flex;
   align-items: center;
@@ -38,13 +40,8 @@ p {
 .container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
 }
-
-/* 以下可以实现和 `gap: 10px`类似的效果 */
-/* .container div {
-  margin-top: 10px;
-} */
 
 * {
   transition-duration: 0.5s;
