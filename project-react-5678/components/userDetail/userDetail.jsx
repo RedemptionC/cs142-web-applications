@@ -17,7 +17,7 @@ class UserDetail extends React.Component {
 
   componentDidMount() {
     console.log("componentDidMount in UserDetail is called");
-    fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`)
+    fetchModel(`/user/${this.props.match.params.userId}`)
       .then((result) => {
         let user = result["data"];
         this.setState({
@@ -32,7 +32,7 @@ class UserDetail extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.match.params.userId !== prevProps.match.params.userId) {
       console.log("componentDidUpdate in UserDetail is called");
-      fetchModel(`http://localhost:3000/user/${this.props.match.params.userId}`)
+      fetchModel(`/user/${this.props.match.params.userId}`)
         .then((result) => {
           let user = result["data"];
           this.setState({

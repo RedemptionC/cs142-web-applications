@@ -1,8 +1,12 @@
 {
   "editor.formatOnSave": true,
   "files.autoSave": "onFocusChange",
+<<<<<<< HEAD
 <<<<<<< Updated upstream
   "editor.fontFamily": "'Inconsolata NF', '微软雅黑'",
+=======
+  "editor.fontFamily": "'Inconsolata', '微软雅黑'",
+>>>>>>> f1cf92cb319e1ac9ffe0ec45722a7692aebc1bb0
   "python.formatting.provider": "yapf"
 =======
   "editor.fontFamily": "Inconsolata, '微软雅黑'",
